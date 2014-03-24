@@ -19,7 +19,7 @@ public class SniperResultProcess {
 	SniperResultProcess(String result_dir, String option_value){
 		this.result_dir = result_dir;
 		this.option_value = option_value;
-		parsec = new String[]{"canneal"/*"facesim","raytrace","vips","x264"/*"canneal"/*,"swaptions","blackscholes"*/};//"facesim","raytrace","vips","x264","bodytrack","canneal","dedup","fluidanimate","freqmine","streamcluster"};
+		parsec = new String[]{"blackscholes","canneal","dedup","ferret","fluidanimate","freqmine","raytrace","swaptions","vips","x264"/*"facesim","raytrace","vips","x264"/*"canneal"/*,"swaptions","blackscholes"*/};//"facesim","raytrace","vips","x264","bodytrack","canneal","dedup","fluidanimate","freqmine","streamcluster"};
 	}
 	
 	private static Integer coreNumberSniper(Integer i) {
