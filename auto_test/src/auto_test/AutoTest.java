@@ -62,10 +62,14 @@ public class AutoTest {
 				System.out
 						.println("###################### END OF GRAPHITE AUTOTESTS ######################");
 			}
+			else if(args[0].equals("graphite-process")){
+				GraphiteResultProcess rp = new GraphiteResultProcess(args[1]);
+				rp.process();
+				//graphite-process folder-with-tests
+			}
 			else if(args[0].equals("sniper")){
 				System.out.println("###################### STARTING SNIPER AUTOTESTS ######################");
-				//System.out
-				//.println("##### SNIPER requires BENCHMARKS_ROOT and SNIPER_ROOT to be set");
+				//System.out.println("##### SNIPER requires BENCHMARKS_ROOT and SNIPER_ROOT to be set");
 				SniperTestGenerator testgen = new SniperTestGenerator(
 						sniper_path, test_folder_path+"sniper/");
 				System.out.println(args[1] + " " + args[2]);
@@ -83,7 +87,7 @@ public class AutoTest {
 			else if(args[0].equals("sniper-process")){
 				SniperResultProcess rp = new SniperResultProcess(args[1], args[2]);
 				rp.process();
-				//sniper-process /home/inescid/Desktop/autotests/sniper/parsec-2d-mesh-ThuFeb2016:36:31GMT2014/ swaptions
+				//sniper-process folder-with-tests swaptions
 			}
 		}
 		

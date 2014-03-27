@@ -19,7 +19,7 @@ public class SniperResultProcess {
 	SniperResultProcess(String result_dir, String option_value){
 		this.result_dir = result_dir;
 		this.option_value = option_value;
-		parsec = new String[]{"canneal"/*"facesim","raytrace","vips","x264"/*"canneal"/*,"swaptions","blackscholes"*/};//"facesim","raytrace","vips","x264","bodytrack","canneal","dedup","fluidanimate","freqmine","streamcluster"};
+		parsec = new String[]{"streamcluster"/*"facesim","raytrace","vips","x264"/*"canneal"/*,"swaptions","blackscholes"*/};//"facesim","raytrace","vips","x264","bodytrack","canneal","dedup","fluidanimate","freqmine","streamcluster"};
 	}
 	
 	private static Integer coreNumberSniper(Integer i) {
@@ -58,7 +58,7 @@ public class SniperResultProcess {
 			simout_line= FileUtils.getLineStartingWith("  Time", result_dir+"parsec-"+parsec_elem+"-"+cores+"/sim.out");
 			write_cache_line= FileUtils.getSecondLineStartingWith("    write miss rate", result_dir+"parsec-"+parsec_elem+"-"+cores+"/sim.out");
 			read_cache_line= FileUtils.getSecondLineStartingWith("    read miss rate", result_dir+"parsec-"+parsec_elem+"-"+cores+"/sim.out");
-			mesh_contention = FileUtils.getLineStartingWith("network.shmem-1.mesh.total-delay =",result_dir+"parsec-"+parsec_elem+"-"+cores+"/stats_out.txt");
+			mesh_contention = FileUtils.getLineStartingWith("network.shmem-1.mesh.contention-delay =",result_dir+"parsec-"+parsec_elem+"-"+cores+"/stats_out.txt");
 			directory_entries = FileUtils.getLineStartingWith("directory.entries-allocated =",result_dir+"parsec-"+parsec_elem+"-"+cores+"/stats_out.txt");
 			dram_access_latency = FileUtils.getLineStartingWith("dram.total-access-latency =",result_dir+"parsec-"+parsec_elem+"-"+cores+"/stats_out.txt");
 			if(simout_line.equals("") ){
@@ -81,14 +81,14 @@ public class SniperResultProcess {
 			
 			
 			mesh_contention= mesh_contention.replace(" ", "");
-			mesh_contention= mesh_contention.replace("network.shmem-1.mesh.total-delay=", "");
+			mesh_contention= mesh_contention.replace("network.shmem-1.mesh.contention-delay=", "");
 			Double total_mesh_contention = Double.valueOf(0);
 			if(!mesh_contention.equals("NONE")){
 			String[] split_mesh_contention = mesh_contention.split(",");
 			System.out.println("NUMBER:"+split_mesh_contention+"   "+mesh_contention);
 			for(int i = 0; i<split_mesh_contention.length;i++){
 				System.out.println("NUMBER:"+i+" content: "+ mesh_contention.split(",")[i]);
-				total_mesh_contention += Double.valueOf(mesh_contention.split(",")[i]);
+				total_mesh_contention += Double.valueOf(mesh_contention.split(",")[i])/1000000000;
 			}
 			}
 			
@@ -99,7 +99,7 @@ public class SniperResultProcess {
 			String[] split_dram_access_latency = dram_access_latency.split(",");
 			for(int i = 0; i<split_dram_access_latency.length;i++){
 			//	System.out.println("NUMBER:"+i+" content: "+ mesh_contention.split(",")[i]);
-				total_dram_access_latency += Double.valueOf(dram_access_latency.split(",")[i]);
+				total_dram_access_latency += Double.valueOf(dram_access_latency.split(",")[i])/1000000000;
 			}
 			
 			
