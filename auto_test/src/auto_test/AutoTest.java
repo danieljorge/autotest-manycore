@@ -62,6 +62,7 @@ public class AutoTest {
 				System.out
 						.println("###################### END OF GRAPHITE AUTOTESTS ######################");
 			}
+			//
 			else if(args[0].equals("graphite-process")){
 				GraphiteResultProcess rp = new GraphiteResultProcess(args[1]);
 				rp.process();
