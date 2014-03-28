@@ -21,7 +21,7 @@ public class SniperTestGenerator {
 		String test_name = "standard_value_for_test_name";
 		String test_folder_with_date = "standard_value_for_test_folder_with_date";
 		if(command.equals("parsec")){
-			String[] parsec_workloads = new String[]{"canneal"/*"canneal"/*"swaptions","blackscholes"*/};//,"raytrace","vips","x264","bodytrack","canneal","dedup","fluidanimate","freqmine","facesim"};//falta streamcluster
+			String[] parsec_workloads = new String[]{"blackscholes","canneal","dedup","ferret","fluidanimate","freqmine","raytrace","swaptions","vips","x264"/*"canneal"/*"swaptions","blackscholes"*/};//,"raytrace","vips","x264","bodytrack","canneal","dedup","fluidanimate","freqmine","facesim"};//falta streamcluster
 			String config_file="base";
 			test_name = new String(command+"-"+option_value+"-"+Calendar.getInstance().getTime()).replace(" ", "");
 			test_folder_with_date = test_folder_path+test_name+"/";
@@ -36,7 +36,7 @@ public class SniperTestGenerator {
 				for(Integer cores_tmp: num_cores){
 					new_test.add("");
 					new_test.add("echo \"EXECUTING WORKLOAD:"+workload+" WITH "+cores_tmp+" CORES\"\n");
-					new_test.add("time ./run-sniper -p parsec-"+workload+" -i small -n "+cores_tmp+" -c "+config_file+" -d "+test_folder_with_date+"parsec-"+workload+"-"+cores_tmp+"\n");
+					new_test.add("time ./run-sniper -p parsec-"+workload+" -i medium -n "+cores_tmp+" -c "+config_file+" -d "+test_folder_with_date+"parsec-"+workload+"-"+cores_tmp+"\n");
 					new_test.add("cd "+test_folder_with_date+"parsec-"+workload+"-"+cores_tmp+"\n");
 					new_test.add("python /home/inescid/sniper-5.2/tools/dumpstats.py > stats_out.txt\n");
 					new_test.add("python /home/inescid/sniper-5.2/tools/cpistack.py\n");
