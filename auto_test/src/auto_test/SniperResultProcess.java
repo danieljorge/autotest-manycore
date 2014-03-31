@@ -19,7 +19,7 @@ public class SniperResultProcess {
 	SniperResultProcess(String result_dir, String option_value){
 		this.result_dir = result_dir;
 		this.option_value = option_value;
-		parsec = new String[]{"streamcluster"/*"facesim","raytrace","vips","x264"/*"canneal"/*,"swaptions","blackscholes"*/};//"facesim","raytrace","vips","x264","bodytrack","canneal","dedup","fluidanimate","freqmine","streamcluster"};
+		parsec = new String[]{"dedup"/*"facesim","raytrace","vips","x264"/*"canneal"/*,"swaptions","blackscholes"*/};//"facesim","raytrace","vips","x264","bodytrack","canneal","dedup","fluidanimate","freqmine","streamcluster"};
 	}
 	
 	private static Integer coreNumberSniper(Integer i) {
@@ -62,7 +62,7 @@ public class SniperResultProcess {
 			directory_entries = FileUtils.getLineStartingWith("directory.entries-allocated =",result_dir+"parsec-"+parsec_elem+"-"+cores+"/stats_out.txt");
 			dram_access_latency = FileUtils.getLineStartingWith("dram.total-access-latency =",result_dir+"parsec-"+parsec_elem+"-"+cores+"/stats_out.txt");
 			if(simout_line.equals("") ){
-				if(cores > 100){
+				if(cores > 1000){
 				finished = true;
 				break;
 				}
